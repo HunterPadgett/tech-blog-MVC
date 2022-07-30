@@ -27,9 +27,6 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
-      validate: {
-        isAlphanumeric: true,
-      },
     },
     password: {
       type: DataTypes.STRING,
@@ -38,6 +35,13 @@ User.init(
         len: [6],
       },
     },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        isEmail: true,
+      },
+    }
   },
   {
     hooks: {

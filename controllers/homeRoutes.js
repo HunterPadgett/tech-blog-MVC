@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
       include: [
         {
           model: User,
-          attributes: ['name'],
+          attributes: ['username'],
         },
       ],
     });
@@ -27,6 +27,7 @@ router.get('/', async (req, res) => {
   }
 });
 
+// get profile page for specific user
 router.get('/blog/:id', async (req, res) => {
   try {
     const blogData = await Blog.findByPk(req.params.id, {
@@ -40,8 +41,8 @@ router.get('/blog/:id', async (req, res) => {
 
     const blog = blogData.get({ plain: true });
 
-    res.render('blog', {
-      ...blog,
+    res.render('profile', {
+      blog,
       logged_in: req.session.logged_in
     });
   } catch (err) {

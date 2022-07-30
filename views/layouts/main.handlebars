@@ -18,13 +18,13 @@
     <nav class="navbar-brand text-white">
       <!-- Conditionally render login or logout links -->
       {{#if logged_in}}
-      <a href="/" class="link-light">Home</a>
-      <a href="/profile" class="link-light">Dashboard</a>
-      <a href="/login" class="link-light">Logout</a>
+      <a href="/" class="link-light m-1">Home</a>
+      <a href="/profile" class="link-light m-1">Dashboard</a>
+      <a href="/login" id="logout" class="link-light m-1">Logout</a>
       {{else}}
-      <a href="/" class="link-light">Home</a>
-      <a href="/profile" class="link-light">Dashboard</a>
-      <a href="/login" class="link-light">Login</a>
+      <a href="/" class="link-light m-1">Home</a>
+      <a href="/profile" class="link-light m-1">Dashboard</a>
+      <a href="/login" class="link-light m-1">Login</a>
       {{/if}}
     </nav>
   </nav>
