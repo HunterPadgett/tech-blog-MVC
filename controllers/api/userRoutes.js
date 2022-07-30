@@ -18,7 +18,7 @@ router.post('/', async (req, res) => {
 });
 
 // /api/users/login         for log in
-router.post('/login'), async (req, res) => {
+router.post('/login', async (req, res) => {
   try {
     const userData = await User.findOne({ where: { email: req.body.email}});
 
@@ -48,7 +48,7 @@ router.post('/login'), async (req, res) => {
   } catch (err) {
     res.status(400).json(err);
   }
-};
+});
 
 // /api/users/logout
 router.post('/logout', (req, res) => {
