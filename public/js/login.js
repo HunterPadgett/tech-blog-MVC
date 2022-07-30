@@ -11,13 +11,11 @@ const loginHandler = async (event) => {
       headers: { 'Content-Type': 'application/json' },
     });
 
-    console.log(response);
-
     if (response.ok) {
       // If successful, redirect the browser to the profile page
       document.location.replace('/profile');
     } else {
-      alert(response.statusText);
+      alert('Incorrect email or password');
     }
   }
 };
@@ -36,8 +34,6 @@ const signupHandler = async (event) => {
       body: JSON.stringify({ username, name, email, password }),
       headers: { 'Content-Type': 'application/json' },
     });
-
-    console.log(response);
 
     if (response.ok) {
       document.location.replace('/profile');

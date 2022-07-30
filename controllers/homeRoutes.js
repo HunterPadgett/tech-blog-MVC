@@ -27,21 +27,21 @@ router.get('/', async (req, res) => {
   }
 });
 
-// get profile page for specific user
+// get route to show individual blog posts
 router.get('/blog/:id', async (req, res) => {
   try {
     const blogData = await Blog.findByPk(req.params.id, {
       include: [
         {
           model: User,
-          attributes: ['name'],
+          attributes: ['username'],
         },
       ],
     });
 
     const blog = blogData.get({ plain: true });
 
-    res.render('profile', {
+    res.render('blog', {
       blog,
       logged_in: req.session.logged_in
     });
