@@ -1,5 +1,3 @@
-
-
 // WHEN I click on the homepage option in the navigation
 // THEN I am taken to the homepage and presented with existing blog posts that include the post title and the date created
 // WHEN I click on an existing blog post
@@ -18,8 +16,6 @@
 // THEN I am signed out of the site
 // WHEN I am idle on the site for more than a set time
 // THEN I am able to view comments but I am prompted to log in again before I can add, update, or delete comments
-
-
 
 const path = require('path');
 const express = require('express');
@@ -41,8 +37,8 @@ const sess = {
   resave: false,
   saveUninitialized: true,
   store: new SequelizeStore({
-    db: sequelize,
-  }),
+    db: sequelize
+  })
 };
 
 app.use(session(sess));
