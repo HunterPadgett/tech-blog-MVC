@@ -20,21 +20,17 @@ router.post('/', async (req, res) => {
 // /api/users/login         for log in of existing users in db
 router.post('/login', async (req, res) => {
   try {
-    const userData = await User.findOne({ where: { email: req.body.email}});
+    const userData = await User.findOne({ where: { email: req.body.email } });
 
     if (!userData) {
-      res
-        .status(400)
-        .json({ message: 'Incorrect email, please try again' });
+      res.status(400).json({ message: 'Incorrect email, please try again' });
       return;
     }
 
     const validPassword = await userData.checkPassword(req.body.password);
 
     if (!validPassword) {
-      res
-        .status(400)
-        .json({ message: 'Incorrect password, please try again' });
+      res.status(400).json({ message: 'Incorrect password, please try again' });
       return;
     }
 
@@ -44,7 +40,6 @@ router.post('/login', async (req, res) => {
 
       res.json({ user: userData, message: 'Welcome!' });
     });
-
   } catch (err) {
     res.status(400).json(err);
   }
@@ -60,6 +55,5 @@ router.post('/logout', (req, res) => {
     res.status(404).end();
   }
 });
-
 
 module.exports = router;

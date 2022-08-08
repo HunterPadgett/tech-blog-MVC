@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Blog, User } = require('../models');
+const { Blog, User, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
@@ -9,9 +9,9 @@ router.get('/', async (req, res) => {
       include: [
         {
           model: User,
-          attributes: ['username'],
-        },
-      ],
+          attributes: ['username']
+        }
+      ]
     });
 
     // Serialize data so the template can read it
@@ -34,9 +34,9 @@ router.get('/blog/:id', async (req, res) => {
       include: [
         {
           model: User,
-          attributes: ['username'],
-        },
-      ],
+          attributes: ['username']
+        }
+      ]
     });
 
     const blog = blogData.get({ plain: true });
@@ -53,15 +53,48 @@ router.get('/blog/:id', async (req, res) => {
 // Use withAuth middleware to prevent access to route
 router.get('/profile', withAuth, async (req, res) => {
   try {
+    if (req.session.logged_in) {
+      const blogData = await Blog.findAll({
+        where: {
+          user_id: req.session.user_id
+        },
+        include: [
+          {
+            model: User,
+            attributes: ['username']
+          }
+        ]
+      });
+
+      const userBlogss = blogData.map((blog) =>
+        blog.get({
+          plain: true
+        })
+      );
+
+      res.render('profile', {
+        userBlogss,
+        logged_in: req.session.logged_in
+      });
+    } else {
+      res.redirect('login');
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/newblog', withAuth, async (req, res) => {
+  try {
     // Find the logged in user based on the session ID
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
-      include: [{ model: Blog }],
+      include: [{ model: Blog }]
     });
 
     const user = userData.get({ plain: true });
 
-    res.render('profile', {
+    res.render('newblog', {
       ...user,
       logged_in: true
     });

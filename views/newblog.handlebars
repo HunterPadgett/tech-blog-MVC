@@ -1,0 +1,22 @@
+<section id='write-post'>
+  <div class='blogContainer pt-5'>
+    <form id='post-form' class='newBlogForm'>
+      <div class='form-group'>
+        <label for='title' class='h3'>Blog Title:</label>
+        <input type='text' class='form-control' name='title' id='blog_title' />
+      </div>
+      <div class='form-group'>
+        <label for='body' class='h3'>What Would You Like to Blog About?</label>
+        <textarea class='form-control' id='blog_body' rows='6'></textarea>
+      </div>
+      <button
+        href='/profile'
+        type='submit'
+        id='blogSubmit'
+        class='btn bg-dark text-white'
+      >Post Blog</button>
+    </form>
+  </div>
+</section>
+
+<script src='./js/newblog.js'></script>
