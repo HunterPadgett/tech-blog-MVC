@@ -1,14 +1,16 @@
 const newBlog = async (event) => {
   event.preventDefault();
 
-  const blog_title = document.getElementById('blog_title').value;
-  const blog_body = document.getElementById('blog_body').value;
+  const blog_title = document.getElementById('blogTitle').value.trim();
+  const blog_body = document.getElementById('blogBody').value.trim();
+  console.log('resposdfsfsfsdfdsfsfnse');
 
   if (blog_title && blog_body) {
+    console.log(blog_body);
     const response = await fetch('/api/blog', {
       method: 'POST',
       body: JSON.stringify({ blog_title, blog_body }),
-      headers: { 'Content-Type': 'application/json' }
+      headers: { 'Content-type': 'application/json' }
     });
 
     if (response.ok) {

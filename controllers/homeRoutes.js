@@ -50,11 +50,11 @@ router.get('/blog/:id', async (req, res) => {
   }
 });
 
-// Use withAuth middleware to prevent access to route
-router.get('/profile', withAuth, async (req, res) => {
+// display only logged in user's blogs to their dashboard
+router.get('/profile', async (req, res) => {
   try {
     if (req.session.logged_in) {
-      const blogData = await Blog.findAll({
+      const userBlogs = await Blog.findAll({
         where: {
           user_id: req.session.user_id
         },
@@ -66,14 +66,10 @@ router.get('/profile', withAuth, async (req, res) => {
         ]
       });
 
-      const userBlogss = blogData.map((blog) =>
-        blog.get({
-          plain: true
-        })
-      );
+      const blogs = userBlogs.map((blog) => blog.get({ plain: true }));
 
       res.render('profile', {
-        userBlogss,
+        blogs,
         logged_in: req.session.logged_in
       });
     } else {
@@ -84,6 +80,7 @@ router.get('/profile', withAuth, async (req, res) => {
   }
 });
 
+//
 router.get('/newblog', withAuth, async (req, res) => {
   try {
     // Find the logged in user based on the session ID
@@ -103,6 +100,7 @@ router.get('/newblog', withAuth, async (req, res) => {
   }
 });
 
+// once logged in, send to profile aka dashboard
 router.get('/login', (req, res) => {
   // If the user is already logged in, redirect the request to another route
   if (req.session.logged_in) {

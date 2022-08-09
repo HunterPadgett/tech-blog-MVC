@@ -2,18 +2,18 @@ const router = require('express').Router();
 const { Blog, User, Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
+// post new blog
 router.post('/', withAuth, async (req, res) => {
-  console.log(req.body);
   try {
-    const newBlog = await Blog.create({
+    const blogData = await Blog.create({
       ...req.body,
-      userId: req.session.userId
+      user_id: req.session.user_id
     });
-
-    res.status(200).json(newBlog);
-    // res.status(200).json({message: "it worked"})
+    res.status(200).json(blogData);
+    // res.redirect('profile');
   } catch (err) {
-    res.status(400).json(err);
+    console.log(err);
+    res.status(500).json(err);
   }
 });
 
