@@ -1,18 +1,32 @@
-<h2>Your Blog Posts</h2>
+<div class='d-flex justify-content-around pb-5'>
+  <h2>Your Blog Posts</h2>
+  <button type='submit' class='btn'><a
+      class='link-dark h3'
+      href='/newblog'
+    >Create New Blog Post</a></button>
+</div>
 
 {{#each blogs as |blog|}}
   <div class='row mb-4 border border-dark blog'>
     <div class='col-md-5'>
-      <h3 class='bg-dark text-white mb-0 p-1'>
+      <h4 class='bg-dark text-white mb-0 p-1'>
         <a class='link-light' href=''>{{blog.blog_title}}</a>
-      </h3>
+      </h4>
       <p class='bg-dark text-white p-1'>Created on
         {{format_date date_created}}</p>
       <p>{{blog.blog_body}}</p>
 
     </div>
+    <div class='d-flex justify-content-around'>
+      <button class='editBtn' style='background-color: green;'><a
+          href='/editblog'
+          class='link-light'
+        >edit blog</a></button>
+
+      <button class='deleteBtn' style='background-color: red;'><a
+          href='/editblog'
+          class='link-light'
+        >delete blog</a></button>
+    </div>
   </div>
 {{/each}}
-
-<button type='submit' class='btn'><a class='link-primary' href='/newblog'>Create
-    New Blog Post</a></button>

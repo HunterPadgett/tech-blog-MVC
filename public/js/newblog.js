@@ -3,7 +3,6 @@ const newBlog = async (event) => {
 
   const blog_title = document.getElementById('blogTitle').value.trim();
   const blog_body = document.getElementById('blogBody').value.trim();
-  console.log('resposdfsfsfsdfdsfsfnse');
 
   if (blog_title && blog_body) {
     console.log(blog_body);
@@ -22,4 +21,5 @@ const newBlog = async (event) => {
   }
 };
 
-document.getElementById('blogSubmit').addEventListener('submit', newBlog);
+// on forms target the form id NOT the button id smhsmhsmh
+document.getElementById('blogForm').addEventListener('submit', newBlog);

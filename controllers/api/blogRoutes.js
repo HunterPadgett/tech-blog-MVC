@@ -17,4 +17,18 @@ router.post('/', withAuth, async (req, res) => {
   }
 });
 
+router.put('/:id', withAuth, async (req, res) => {
+  Blog.update(req.body, {
+    where: {
+      id: req.params.id
+    }
+  })
+    .then((blog) => {
+      res.json(blog);
+    })
+    .catch((err) => {
+      res.json(err);
+    });
+});
+
 module.exports = router;
