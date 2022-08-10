@@ -67,6 +67,7 @@ router.get('/profile', async (req, res) => {
       });
 
       const blogs = userBlogs.map((blog) => blog.get({ plain: true }));
+      console.log(blogs);
 
       res.render('profile', {
         blogs,
@@ -90,6 +91,7 @@ router.get('/newblog', withAuth, async (req, res) => {
     });
 
     const user = userData.get({ plain: true });
+    console.log(user);
 
     res.render('newblog', {
       ...user,
@@ -109,25 +111,7 @@ router.get('/editblog', withAuth, async (req, res) => {
     });
 
     const user = userData.get({ plain: true });
-
-    res.render('editblog', {
-      ...user,
-      logged_in: true
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-router.get('/editblog/:id', async (req, res) => {
-  try {
-    const userData = await User.findByPk(req.session.user_id, {
-      attributes: { exclude: ['password'] },
-      include: [{ model: Blog }]
-    });
-
-    const user = userData.get({ plain: true });
-
+    console.log(user);
     res.render('editblog', {
       ...user,
       logged_in: true
